@@ -176,6 +176,21 @@ Motivo:
 
 As VLANs possuem domínios de broadcast separados e não existe roteamento entre elas.
 
+## 🧪 Testes de conectividade
+
+### Ping entre PCs da mesma VLAN 10 (Administração) e PCs da VLAN 20 (TI)
+
+- PC1 → PC2,  PC1 → PC3,  PC1 → PC4         - PC2 → PC1,  PC2 → PC3,  PC2 → PC4
+
+![Teste Ping PC1 e PC2](imagens/ping-P1-and-P2.png)
+
+
+### Ping entre PCs da mesma VLAN 20 (TI) e PCs da VLAN 10 (Administração)
+
+- PC3 → PC4,  PC3 → PC1,  PC3 → PC2           - PC4 → PC3,  PC4 → PC1,  PC4 → PC2
+
+![Teste Ping PC3 e PC4](imagens/ping-P3-and-P4.png)
+
 ![Testes de ping](imagens/testes-ping.png)
 
 ---
