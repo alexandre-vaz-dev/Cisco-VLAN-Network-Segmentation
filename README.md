@@ -134,64 +134,59 @@ Resultado:
 
 ---
 
-# 🧪 Testes realizados
+# 🧪 Testes de Conectividade
 
-## Comunicação dentro da mesma VLAN
+Após a configuração das VLANs, foram realizados testes de comunicação para validar a segmentação da rede.
 
-PC1 → PC2
+Os testes tiveram como objetivo verificar:
 
-```bash
-ping 192.168.10.20
-```
-
-Resultado:
-
-✅ Comunicação realizada com sucesso.
-
-PC3 → PC4
-
-```bash
-ping 192.168.20.20
-```
-
-Resultado:
-
-✅ Comunicação realizada com sucesso.
+- Comunicação entre dispositivos da mesma VLAN;
+- Bloqueio da comunicação entre VLANs diferentes;
+- Separação dos domínios de broadcast.
 
 ---
 
-## Teste entre VLANs diferentes
+## VLAN 10 - Administração
 
-PC1 → PC3
+| Origem | Destino | Resultado |
+|---|---|---|
+| PC1 | PC2 | ✅ Comunicação permitida |
+| PC1 | PC3 | ❌ Bloqueado (VLAN diferente) |
+| PC1 | PC4 | ❌ Bloqueado (VLAN diferente) |
+| PC2 | PC1 | ✅ Comunicação permitida |
+| PC2 | PC3 | ❌ Bloqueado (VLAN diferente) |
+| PC2 | PC4 | ❌ Bloqueado (VLAN diferente) |
 
-```bash
-ping 192.168.20.10
-```
+### Evidência do teste
 
-Resultado:
+![Teste Ping VLAN 10](imagens/ping-P1-and-P2.png)
 
-❌ Comunicação bloqueada.
+---
 
-Motivo:
+## VLAN 20 - TI
 
-As VLANs possuem domínios de broadcast separados e não existe roteamento entre elas.
+| Origem | Destino | Resultado |
+|---|---|---|
+| PC3 | PC4 | ✅ Comunicação permitida |
+| PC3 | PC1 | ❌ Bloqueado (VLAN diferente) |
+| PC3 | PC2 | ❌ Bloqueado (VLAN diferente) |
+| PC4 | PC3 | ✅ Comunicação permitida |
+| PC4 | PC1 | ❌ Bloqueado (VLAN diferente) |
+| PC4 | PC2 | ❌ Bloqueado (VLAN diferente) |
 
-## 🧪 Testes de conectividade
+### Evidência do teste
 
-### Ping entre PCs da mesma VLAN 10 (Administração) e PCs da VLAN 20 (TI)
+![Teste Ping VLAN 20](imagens/ping-P3-and-P4.png)
 
-- PC1 → PC2,  PC1 → PC3,  PC1 → PC4         - PC2 → PC1,  PC2 → PC3,  PC2 → PC4
+---
 
-![Teste Ping PC1 e PC2](imagens/ping-P1-and-P2.png)
+## Resultado dos testes
 
+✅ Dispositivos pertencentes à mesma VLAN conseguem se comunicar.
 
-### Ping entre PCs da mesma VLAN 20 (TI) e PCs da VLAN 10 (Administração)
+❌ Dispositivos em VLANs diferentes não conseguem se comunicar, pois não existe roteamento entre as redes.
 
-- PC3 → PC4,  PC3 → PC1,  PC3 → PC2           - PC4 → PC3,  PC4 → PC1,  PC4 → PC2
-
-![Teste Ping PC3 e PC4](imagens/ping-P3-and-P4.png)
-
-![Testes de ping](imagens/testes-ping.png)
+A segmentação através de VLANs criou domínios de broadcast independentes, isolando os departamentos Administração e TI.
 
 ---
 
